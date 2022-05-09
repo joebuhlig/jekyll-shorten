@@ -48,6 +48,13 @@ module Jekyll
         num_to_sxg(epoch_days)
       end
 
+      def n_count
+        filtered = @obj.site.collections[@obj.type.to_s].docs.select { |doc| doc.date.to_date == @obj.date.to_date }
+        sorted = filtered.sort_by { |doc| doc.date }
+        index = sorted.find_index { |doc| doc.date == @obj.date }
+        index += 1
+        index.to_s || "1"
+      end
 
       # converts base10 integers into NewBase60
       def num_to_sxg(num=nil)
