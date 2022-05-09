@@ -44,26 +44,12 @@ module Jekyll
     class UrlDrop
 
       def nbsixty
-        epoch_days = Time.parse(@obj.date.to_date.to_s).to_i / (60 * 60 * 24)
-        num_to_sxg(epoch_days)
+        puts @obj
+        puts @obj.date
+        puts Time.new(@obj.date.to_date).to_i
+        "testing"
       end
 
-
-      # converts base10 integers into NewBase60
-      def num_to_sxg(num=nil)
-        sxg        = ""
-        vocabulary = "0123456789ABCDEFGHJKLMNPQRSTUVWXYZ_abcdefghijkmnopqrstuvwxyz"
-
-        return 0 if num.nil? || num.zero?
-
-        while num > 0 do
-          mod = num % 60
-          sxg = "#{vocabulary[mod,1]}#{sxg}"
-          num = (num - mod) / 60
-        end
-
-        sxg
-      end
     end
   end
 end
